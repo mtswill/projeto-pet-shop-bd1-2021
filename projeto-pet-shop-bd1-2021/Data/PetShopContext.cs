@@ -32,6 +32,8 @@ namespace projeto_pet_shop_bd1_2021.Data
             modelBuilder.Entity<Atendimento>().HasKey(a => a.Id);
             modelBuilder.Entity<Servico>().HasKey(a => a.Id);
 
+            modelBuilder.Entity<ServicoAtendimento>().HasNoKey();
+
             #endregion PK
 
             #region Relacionamentos
@@ -41,6 +43,9 @@ namespace projeto_pet_shop_bd1_2021.Data
 
             modelBuilder.Entity<Animal>().HasOne(a => a.Raca).WithMany();
             modelBuilder.Entity<Raca>().HasOne(r => r.TipoAnimal).WithOne();
+
+            modelBuilder.Entity<ServicoAtendimento>().HasOne(sa => sa.Atendimento).WithOne();
+            modelBuilder.Entity<ServicoAtendimento>().HasMany(sa => sa.Servico).WithOne();
 
             #endregion Relacionamentos
         }
@@ -53,5 +58,6 @@ namespace projeto_pet_shop_bd1_2021.Data
         public DbSet<TipoAnimal> TipoAnimal { get; set; }
         public DbSet<Atendimento> Atendimento { get; set; }
         public DbSet<Servico> Servico { get; set; }
+        public DbSet<ServicoAtendimento> ServicoAtendimento { get; set; }
     }
 }
