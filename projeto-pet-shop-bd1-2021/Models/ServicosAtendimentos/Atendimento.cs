@@ -14,10 +14,13 @@ namespace projeto_pet_shop_bd1_2021.Models.ServicosAtendimentos
         [Column("data_hora")]
         public DateTime DataHora { get; set; }
 
-        [ForeignKey("id_animal")]
-        public long IdAnimal { get; set; }
+        [ForeignKey("animal_id")]
+        public long AnimalId { get; set; }
 
-        [ForeignKey("id_funcionario")]
-        public long IdFuncionario { get; set; }
+        [ForeignKey("funcionario_id")]
+        public long FuncionarioId { get; set; }
+
+        public Animal Animal { get; set; }
+        public Funcionario Funcionario { get; set; }
     }
 }
