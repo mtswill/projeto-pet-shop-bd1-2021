@@ -29,6 +29,24 @@ namespace projeto_pet_shop_bd1_2021.Controllers
         {
             return View();
         }
+        
+        public IActionResult Details(long id)
+        {
+            var model = _repository.FindById(id);
+            return View(model);
+        }
+        
+        public IActionResult Edit(long id)
+        {
+            var model = _repository.FindById(id);
+            return View(model);
+        }
+        
+        public IActionResult Delete(long id)
+        {
+            var model = _repository.FindById(id);
+            return View(model);
+        }
 
         #endregion Views
 
@@ -41,6 +59,32 @@ namespace projeto_pet_shop_bd1_2021.Controllers
             if (ModelState.IsValid)
             {
                 _repository.Create(pessoa);
+                return RedirectToAction(nameof(Details), new { id = pessoa.Id });
+            }
+
+            return View();
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Pessoa pessoa)
+        {
+            if (ModelState.IsValid)
+            {
+                _repository.Update(pessoa);
+                return RedirectToAction(nameof(Details), new { id = pessoa.Id });
+            }
+
+            return View();
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(long? id)
+        {
+            if (id != null)
+            {
+                _repository.Delete((long)id);
                 return RedirectToAction(nameof(Index));
             }
 
