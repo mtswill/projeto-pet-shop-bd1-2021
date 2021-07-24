@@ -24,15 +24,13 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<long>("ClienteId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("text")
-                        .HasColumnName("nome");
+                        .HasColumnType("text");
 
                     b.Property<long>("RacaId")
                         .HasColumnType("bigint");
@@ -44,7 +42,7 @@ namespace projeto_pet_shop_bd1_2021.Migrations
 
                     b.HasIndex("RacaId");
 
-                    b.ToTable("animal");
+                    b.ToTable("Animal");
                 });
 
             modelBuilder.Entity("projeto_pet_shop_bd1_2021.Models.Animais.Raca", b =>
@@ -52,16 +50,13 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Caracteristica")
-                        .HasColumnType("text")
-                        .HasColumnName("caracteristica");
+                        .HasColumnType("text");
 
                     b.Property<string>("Descricao")
-                        .HasColumnType("text")
-                        .HasColumnName("decricao");
+                        .HasColumnType("text");
 
                     b.Property<long>("TipoAnimalId")
                         .HasColumnType("bigint");
@@ -71,7 +66,7 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                     b.HasIndex("TipoAnimalId")
                         .IsUnique();
 
-                    b.ToTable("raca");
+                    b.ToTable("Raca");
                 });
 
             modelBuilder.Entity("projeto_pet_shop_bd1_2021.Models.Animais.TipoAnimal", b =>
@@ -79,16 +74,14 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Descricao")
-                        .HasColumnType("text")
-                        .HasColumnName("descricao");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("tipo_animal");
+                    b.ToTable("TipoAnimal");
                 });
 
             modelBuilder.Entity("projeto_pet_shop_bd1_2021.Models.Pessoas.Cliente", b =>
@@ -96,7 +89,6 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<long>("PessoaId")
@@ -107,7 +99,7 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                     b.HasIndex("PessoaId")
                         .IsUnique();
 
-                    b.ToTable("cliente");
+                    b.ToTable("Cliente");
                 });
 
             modelBuilder.Entity("projeto_pet_shop_bd1_2021.Models.Pessoas.Funcionario", b =>
@@ -115,7 +107,6 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<long>("PessoaId")
@@ -126,7 +117,7 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                     b.HasIndex("PessoaId")
                         .IsUnique();
 
-                    b.ToTable("funcionario");
+                    b.ToTable("Funcionario");
                 });
 
             modelBuilder.Entity("projeto_pet_shop_bd1_2021.Models.Pessoas.Pessoa", b =>
@@ -134,24 +125,20 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Cpf")
-                        .HasColumnType("text")
-                        .HasColumnName("cpf");
+                        .HasColumnType("text");
 
                     b.Property<string>("Email")
-                        .HasColumnType("text")
-                        .HasColumnName("email");
+                        .HasColumnType("text");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("text")
-                        .HasColumnName("nome");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("pessoa");
+                    b.ToTable("Pessoa");
                 });
 
             modelBuilder.Entity("projeto_pet_shop_bd1_2021.Models.ServicosAtendimentos.Atendimento", b =>
@@ -159,15 +146,13 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<long>("AnimalId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("DataHora")
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("data_hora");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<long>("FuncionarioId")
                         .HasColumnType("bigint");
@@ -180,7 +165,7 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                     b.HasIndex("FuncionarioId")
                         .IsUnique();
 
-                    b.ToTable("atendimento");
+                    b.ToTable("Atendimento");
                 });
 
             modelBuilder.Entity("projeto_pet_shop_bd1_2021.Models.ServicosAtendimentos.Servico", b =>
@@ -188,24 +173,20 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<decimal>("Custo")
-                        .HasColumnType("numeric")
-                        .HasColumnName("custo");
+                        .HasColumnType("numeric");
 
                     b.Property<string>("Descricao")
-                        .HasColumnType("text")
-                        .HasColumnName("descricao");
+                        .HasColumnType("text");
 
                     b.Property<decimal>("Valor")
-                        .HasColumnType("numeric")
-                        .HasColumnName("valor");
+                        .HasColumnType("numeric");
 
                     b.HasKey("Id");
 
-                    b.ToTable("servico");
+                    b.ToTable("Servico");
                 });
 
             modelBuilder.Entity("projeto_pet_shop_bd1_2021.Models.ServicosAtendimentos.ServicoAtendimento", b =>
@@ -222,7 +203,7 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                     b.HasIndex("ServicoId")
                         .IsUnique();
 
-                    b.ToTable("servico_atendimento");
+                    b.ToTable("ServicoAtendimento");
                 });
 
             modelBuilder.Entity("projeto_pet_shop_bd1_2021.Models.Animais.Animal", b =>

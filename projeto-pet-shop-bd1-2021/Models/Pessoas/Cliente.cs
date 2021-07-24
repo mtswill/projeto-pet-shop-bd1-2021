@@ -2,7 +2,6 @@
 
 namespace projeto_pet_shop_bd1_2021.Models.Pessoas
 {
-    [Table("cliente")]
     public class Cliente
     {
         public long Id { get; set; }
