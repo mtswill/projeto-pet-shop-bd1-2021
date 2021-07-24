@@ -32,7 +32,7 @@ namespace projeto_pet_shop_bd1_2021
             services.AddDbContext<PetShopContext>(options => options.UseNpgsql(connectionString));
 
             //DI
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped(typeof(GenericRepository<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

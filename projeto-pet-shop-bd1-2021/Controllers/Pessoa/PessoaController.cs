@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using projeto_pet_shop_bd1_2021.Models.Pessoas;
+using projeto_pet_shop_bd1_2021.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,19 @@ namespace projeto_pet_shop_bd1_2021.Controllers
 {
     public class PessoaController : Controller
     {
+        private GenericRepository<Pessoa> _repository;
+
+        public PessoaController(GenericRepository<Pessoa> repository)
+        {
+            _repository = repository;
+        }
+
         #region Views
-        
+
         public IActionResult Index()
         {
-            return View();
+            var model = _repository.GetAll();
+            return View(model);
         }
         
         public IActionResult Create()
@@ -31,7 +40,8 @@ namespace projeto_pet_shop_bd1_2021.Controllers
         {
             if (ModelState.IsValid)
             {
-                //return RedirectToAction(nameof(Index));
+                _repository.Create(pessoa);
+                return RedirectToAction(nameof(Index));
             }
 
             return View();
