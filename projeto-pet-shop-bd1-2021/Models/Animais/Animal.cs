@@ -3,10 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace projeto_pet_shop_bd1_2021.Models.Animais
 {
-    public class Animal
+    public class Animal : BaseEntity
     {
-        public long Id { get; set; }
-
         public string Nome { get; set; }
 
         [ForeignKey("RacaId")]

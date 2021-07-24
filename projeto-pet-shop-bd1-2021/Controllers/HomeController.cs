@@ -23,7 +23,7 @@ namespace projeto_pet_shop_bd1_2021.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Cadastros()
         {
             return View();
         }

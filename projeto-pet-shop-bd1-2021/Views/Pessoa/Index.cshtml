@@ -1,0 +1,92 @@
+﻿@model IEnumerable<projeto_pet_shop_bd1_2021.Models.Pessoas.Pessoa>
+
+@{
+    ViewData["Title"] = "Index Pessoa";
+}
+
+<h1>Index Pessoa</h1>
+
+<p>
+    <a asp-action="Create">Cadastrar Pessoa</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cpf)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EnderecoLogradouro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EnderecoNumero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EnderecoComplemento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EnderecoCep)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EnderecoCidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EnderecoEstado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @if (Model != null)
+    {
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cpf)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnderecoLogradouro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnderecoNumero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnderecoComplemento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnderecoCep)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnderecoCidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnderecoEstado)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    }
+
+    </tbody>
+</table>
+
+<div>
+    <a asp-controller="Home" asp-action="Cadastros">Voltar para menu</a>
+</div>

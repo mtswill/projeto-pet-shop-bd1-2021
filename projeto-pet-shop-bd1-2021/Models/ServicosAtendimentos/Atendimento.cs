@@ -5,10 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace projeto_pet_shop_bd1_2021.Models.ServicosAtendimentos
 {
-    public class Atendimento
+    public class Atendimento : BaseEntity
     {
-        public long Id { get; set; }
-
         public DateTime DataHora { get; set; }
 
         [ForeignKey("AnimalId")]

@@ -2,10 +2,8 @@
 
 namespace projeto_pet_shop_bd1_2021.Models.Animais
 {
-    public class Raca
+    public class Raca : BaseEntity
     {
-        public long Id { get; set; }
-
         public string Descricao { get; set; }
 
         public string Caracteristica { get; set; }

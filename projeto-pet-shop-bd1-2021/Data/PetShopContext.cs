@@ -21,16 +21,16 @@ namespace projeto_pet_shop_bd1_2021.Data
         {
             #region PK
 
-            modelBuilder.Entity<Pessoa>().HasKey(p => p.Id);
-            modelBuilder.Entity<Funcionario>().HasKey(f => f.Id);
-            modelBuilder.Entity<Cliente>().HasKey(c => c.Id);
+            //modelBuilder.Entity<Pessoa>().HasKey(p => p.Id);
+            //modelBuilder.Entity<Funcionario>().HasKey(f => f.Id);
+            //modelBuilder.Entity<Cliente>().HasKey(c => c.Id);
 
-            modelBuilder.Entity<Animal>().HasKey(a => a.Id);
-            modelBuilder.Entity<Raca>().HasKey(r => r.Id);
-            modelBuilder.Entity<TipoAnimal>().HasKey(ta => ta.Id);
+            //modelBuilder.Entity<Animal>().HasKey(a => a.Id);
+            //modelBuilder.Entity<Raca>().HasKey(r => r.Id);
+            //modelBuilder.Entity<TipoAnimal>().HasKey(ta => ta.Id);
 
-            modelBuilder.Entity<Atendimento>().HasKey(a => a.Id);
-            modelBuilder.Entity<Servico>().HasKey(a => a.Id);
+            //modelBuilder.Entity<Atendimento>().HasKey(a => a.Id);
+            //modelBuilder.Entity<Servico>().HasKey(a => a.Id);
 
             modelBuilder.Entity<ServicoAtendimento>().HasNoKey();
 
