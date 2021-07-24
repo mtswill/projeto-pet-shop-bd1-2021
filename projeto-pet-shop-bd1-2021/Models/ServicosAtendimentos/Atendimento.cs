@@ -8,16 +8,14 @@ namespace projeto_pet_shop_bd1_2021.Models.ServicosAtendimentos
     [Table("atendimento")]
     public class Atendimento
     {
-        [Column("id")]
         public long Id { get; set; }
 
-        [Column("data_hora")]
         public DateTime DataHora { get; set; }
 
-        [ForeignKey("animal_id")]
+        [ForeignKey("AnimalId")]
         public long AnimalId { get; set; }
 
-        [ForeignKey("funcionario_id")]
+        [ForeignKey("FuncionarioId")]
         public long FuncionarioId { get; set; }
 
         public Animal Animal { get; set; }

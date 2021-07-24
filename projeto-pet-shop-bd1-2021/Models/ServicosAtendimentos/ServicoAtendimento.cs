@@ -6,10 +6,10 @@ namespace projeto_pet_shop_bd1_2021.Models.ServicosAtendimentos
     [Table("servico_atendimento")]
     public class ServicoAtendimento
     {
-        [ForeignKey("atendimento_id")]
+        [ForeignKey("AtendimentoId")]
         public long AtendimentoId { get; set; }
 
-        [ForeignKey("servico_id")]
+        [ForeignKey("ServicoId")]
         public long ServicoId { get; set; }
 
         public Atendimento Atendimento { get; set; }
