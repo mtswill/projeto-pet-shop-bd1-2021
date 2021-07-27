@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using projeto_pet_shop_bd1_2021.Models;
 using projeto_pet_shop_bd1_2021.Models.Pessoas;
+using projeto_pet_shop_bd1_2021.Models.ViewModels;
 using projeto_pet_shop_bd1_2021.Repositories;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ namespace projeto_pet_shop_bd1_2021.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            return View(new FuncionarioViewModel(_pessoaRepository.GetAll()));
         }
 
         public IActionResult Details(long id)

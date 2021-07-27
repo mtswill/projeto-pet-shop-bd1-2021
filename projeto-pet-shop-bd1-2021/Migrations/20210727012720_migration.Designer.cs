@@ -10,8 +10,8 @@ using projeto_pet_shop_bd1_2021.Data;
 namespace projeto_pet_shop_bd1_2021.Migrations
 {
     [DbContext(typeof(PetShopContext))]
-    [Migration("20210724134059_migration2")]
-    partial class migration2
+    [Migration("20210727012720_migration")]
+    partial class migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,8 +39,7 @@ namespace projeto_pet_shop_bd1_2021.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClienteId")
-                        .IsUnique();
+                    b.HasIndex("ClienteId");
 
                     b.HasIndex("RacaId");
 
@@ -65,8 +64,7 @@ namespace projeto_pet_shop_bd1_2021.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TipoAnimalId")
-                        .IsUnique();
+                    b.HasIndex("TipoAnimalId");
 
                     b.ToTable("Raca");
                 });
@@ -88,36 +86,23 @@ namespace projeto_pet_shop_bd1_2021.Migrations
 
             modelBuilder.Entity("projeto_pet_shop_bd1_2021.Models.Pessoas.Cliente", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
                     b.Property<long>("PessoaId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("PessoaId")
-                        .IsUnique();
+                    b.HasKey("PessoaId");
 
                     b.ToTable("Cliente");
                 });
 
             modelBuilder.Entity("projeto_pet_shop_bd1_2021.Models.Pessoas.Funcionario", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
                     b.Property<long>("PessoaId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("Id");
+                    b.Property<string>("CarteiraTrabalho")
+                        .HasColumnType("text");
 
-                    b.HasIndex("PessoaId")
-                        .IsUnique();
+                    b.HasKey("PessoaId");
 
                     b.ToTable("Funcionario");
                 });
@@ -179,11 +164,9 @@ namespace projeto_pet_shop_bd1_2021.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AnimalId")
-                        .IsUnique();
+                    b.HasIndex("AnimalId");
 
-                    b.HasIndex("FuncionarioId")
-                        .IsUnique();
+                    b.HasIndex("FuncionarioId");
 
                     b.ToTable("Atendimento");
                 });
@@ -217,11 +200,9 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                     b.Property<long>("ServicoId")
                         .HasColumnType("bigint");
 
-                    b.HasIndex("AtendimentoId")
-                        .IsUnique();
+                    b.HasIndex("AtendimentoId");
 
-                    b.HasIndex("ServicoId")
-                        .IsUnique();
+                    b.HasIndex("ServicoId");
 
                     b.ToTable("ServicoAtendimento");
                 });
@@ -229,8 +210,8 @@ namespace projeto_pet_shop_bd1_2021.Migrations
             modelBuilder.Entity("projeto_pet_shop_bd1_2021.Models.Animais.Animal", b =>
                 {
                     b.HasOne("projeto_pet_shop_bd1_2021.Models.Pessoas.Cliente", "Cliente")
-                        .WithOne()
-                        .HasForeignKey("projeto_pet_shop_bd1_2021.Models.Animais.Animal", "ClienteId")
+                        .WithMany()
+                        .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -248,8 +229,8 @@ namespace projeto_pet_shop_bd1_2021.Migrations
             modelBuilder.Entity("projeto_pet_shop_bd1_2021.Models.Animais.Raca", b =>
                 {
                     b.HasOne("projeto_pet_shop_bd1_2021.Models.Animais.TipoAnimal", "TipoAnimal")
-                        .WithOne()
-                        .HasForeignKey("projeto_pet_shop_bd1_2021.Models.Animais.Raca", "TipoAnimalId")
+                        .WithMany()
+                        .HasForeignKey("TipoAnimalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -281,14 +262,14 @@ namespace projeto_pet_shop_bd1_2021.Migrations
             modelBuilder.Entity("projeto_pet_shop_bd1_2021.Models.ServicosAtendimentos.Atendimento", b =>
                 {
                     b.HasOne("projeto_pet_shop_bd1_2021.Models.Animais.Animal", "Animal")
-                        .WithOne()
-                        .HasForeignKey("projeto_pet_shop_bd1_2021.Models.ServicosAtendimentos.Atendimento", "AnimalId")
+                        .WithMany()
+                        .HasForeignKey("AnimalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("projeto_pet_shop_bd1_2021.Models.Pessoas.Funcionario", "Funcionario")
-                        .WithOne()
-                        .HasForeignKey("projeto_pet_shop_bd1_2021.Models.ServicosAtendimentos.Atendimento", "FuncionarioId")
+                        .WithMany()
+                        .HasForeignKey("FuncionarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -300,14 +281,14 @@ namespace projeto_pet_shop_bd1_2021.Migrations
             modelBuilder.Entity("projeto_pet_shop_bd1_2021.Models.ServicosAtendimentos.ServicoAtendimento", b =>
                 {
                     b.HasOne("projeto_pet_shop_bd1_2021.Models.ServicosAtendimentos.Atendimento", "Atendimento")
-                        .WithOne()
-                        .HasForeignKey("projeto_pet_shop_bd1_2021.Models.ServicosAtendimentos.ServicoAtendimento", "AtendimentoId")
+                        .WithMany()
+                        .HasForeignKey("AtendimentoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("projeto_pet_shop_bd1_2021.Models.ServicosAtendimentos.Servico", "Servico")
-                        .WithOne()
-                        .HasForeignKey("projeto_pet_shop_bd1_2021.Models.ServicosAtendimentos.ServicoAtendimento", "ServicoId")
+                        .WithMany()
+                        .HasForeignKey("ServicoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

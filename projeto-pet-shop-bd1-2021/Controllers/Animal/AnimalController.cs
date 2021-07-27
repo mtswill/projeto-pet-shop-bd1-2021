@@ -5,46 +5,53 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using projeto_pet_shop_bd1_2021.Models.ViewModels;
 
 namespace projeto_pet_shop_bd1_2021.Controllers.AnimalController
 {
     public class AnimalController : Controller
     {
-        private GenericRepository<Animal> _repository;
+        private GenericRepository<Animal> _animalRepository;
+        private GenericRepository<Raca> _racaRepository;
+        private ClienteRepository _clienteRepository;
 
-        public AnimalController(GenericRepository<Animal> repository)
+        public AnimalController(GenericRepository<Animal> animalRepository, GenericRepository<Raca> racaRepository, ClienteRepository clienteRepository)
         {
-            _repository = repository;
+            _animalRepository = animalRepository;
+            _racaRepository = racaRepository;
+            _clienteRepository = clienteRepository;
         }
 
         #region Views
 
         public ActionResult Index()
         {
-            var model = _repository.GetAll();
+            var model = _animalRepository.GetAll();
             return View(model);
         }
 
         public ActionResult Details(long id)
         {
-            var model = _repository.FindById(id);
+            var model = _animalRepository.FindById(id);
             return View(model);
         }
 
         public ActionResult Create()
         {
-            return View();
+            var racas = _racaRepository.GetAll();
+            var model = new AnimalViewModel(racas);
+            return View(model);
         }
 
         public ActionResult Edit(long id)
         {
-            var model = _repository.FindById(id);
+            var model = _animalRepository.FindById(id);
             return View(model);
         }
 
         public ActionResult Delete(long id)
         {
-            var model = _repository.FindById(id);
+            var model = _animalRepository.FindById(id);
             return View(model);
         }
 
@@ -58,7 +65,7 @@ namespace projeto_pet_shop_bd1_2021.Controllers.AnimalController
         {
             if (ModelState.IsValid)
             {
-                _repository.Create(animal);
+                _animalRepository.Create(animal);
                 return RedirectToAction(nameof(Details), new { id = animal.Id });
             }
 
@@ -71,7 +78,7 @@ namespace projeto_pet_shop_bd1_2021.Controllers.AnimalController
         {
             if (ModelState.IsValid)
             {
-                _repository.Update(animal);
+                _animalRepository.Update(animal);
                 return RedirectToAction(nameof(Details), new { id = animal.Id });
             }
 
@@ -84,7 +91,7 @@ namespace projeto_pet_shop_bd1_2021.Controllers.AnimalController
         {
             if (id != null)
             {
-                _repository.Delete((long)id);
+                _animalRepository.Delete((long)id);
                 return RedirectToAction(nameof(Index));
             }
 

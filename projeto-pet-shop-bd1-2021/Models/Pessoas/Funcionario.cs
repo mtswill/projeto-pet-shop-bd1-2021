@@ -5,7 +5,7 @@ namespace projeto_pet_shop_bd1_2021.Models.Pessoas
 {
     public class Funcionario
     {
-        [Display(Name = "ID da pessoa")]
+        [Display(Name = "Pessoa")]
         [ForeignKey("PessoaId")]
         public long PessoaId { get; set; }
 

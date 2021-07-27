@@ -41,15 +41,15 @@ namespace projeto_pet_shop_bd1_2021.Data
             modelBuilder.Entity<Cliente>().HasOne(c => c.Pessoa).WithOne();
             modelBuilder.Entity<Funcionario>().HasOne(f => f.Pessoa).WithOne();
 
-            modelBuilder.Entity<Animal>().HasOne(a => a.Raca).WithMany();
-            modelBuilder.Entity<Animal>().HasOne(a => a.Cliente).WithOne();
-            modelBuilder.Entity<Raca>().HasOne(r => r.TipoAnimal).WithOne();
+            modelBuilder.Entity<Animal>().HasOne(a => a.Raca);
+            modelBuilder.Entity<Animal>().HasOne(a => a.Cliente);
+            modelBuilder.Entity<Raca>().HasOne(r => r.TipoAnimal);
 
-            modelBuilder.Entity<Atendimento>().HasOne(a => a.Animal).WithOne();
-            modelBuilder.Entity<Atendimento>().HasOne(a => a.Funcionario).WithOne();
+            modelBuilder.Entity<Atendimento>().HasOne(a => a.Animal);
+            modelBuilder.Entity<Atendimento>().HasOne(a => a.Funcionario);
 
-            modelBuilder.Entity<ServicoAtendimento>().HasOne(sa => sa.Atendimento).WithOne();
-            modelBuilder.Entity<ServicoAtendimento>().HasOne(sa => sa.Servico).WithOne();
+            modelBuilder.Entity<ServicoAtendimento>().HasOne(sa => sa.Atendimento);
+            modelBuilder.Entity<ServicoAtendimento>().HasOne(sa => sa.Servico);
 
             #endregion Relacionamentos
         }

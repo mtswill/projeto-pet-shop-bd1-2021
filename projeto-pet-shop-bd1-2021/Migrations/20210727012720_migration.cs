@@ -16,7 +16,13 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Cpf = table.Column<string>(type: "text", nullable: true),
                     Nome = table.Column<string>(type: "text", nullable: true),
-                    Email = table.Column<string>(type: "text", nullable: true)
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    EnderecoLogradouro = table.Column<string>(type: "text", nullable: true),
+                    EnderecoNumero = table.Column<string>(type: "text", nullable: true),
+                    EnderecoComplemento = table.Column<string>(type: "text", nullable: true),
+                    EnderecoCep = table.Column<string>(type: "text", nullable: true),
+                    EnderecoCidade = table.Column<string>(type: "text", nullable: true),
+                    EnderecoEstado = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -55,13 +61,11 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                 name: "Cliente",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     PessoaId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cliente", x => x.Id);
+                    table.PrimaryKey("PK_Cliente", x => x.PessoaId);
                     table.ForeignKey(
                         name: "FK_Cliente_Pessoa_PessoaId",
                         column: x => x.PessoaId,
@@ -74,13 +78,12 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                 name: "Funcionario",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    PessoaId = table.Column<long>(type: "bigint", nullable: false)
+                    PessoaId = table.Column<long>(type: "bigint", nullable: false),
+                    CarteiraTrabalho = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Funcionario", x => x.Id);
+                    table.PrimaryKey("PK_Funcionario", x => x.PessoaId);
                     table.ForeignKey(
                         name: "FK_Funcionario_Pessoa_PessoaId",
                         column: x => x.PessoaId,
@@ -127,7 +130,7 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                         name: "FK_Animal_Cliente_ClienteId",
                         column: x => x.ClienteId,
                         principalTable: "Cliente",
-                        principalColumn: "Id",
+                        principalColumn: "PessoaId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Animal_Raca_RacaId",
@@ -160,7 +163,7 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                         name: "FK_Atendimento_Funcionario_FuncionarioId",
                         column: x => x.FuncionarioId,
                         principalTable: "Funcionario",
-                        principalColumn: "Id",
+                        principalColumn: "PessoaId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -190,8 +193,7 @@ namespace projeto_pet_shop_bd1_2021.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Animal_ClienteId",
                 table: "Animal",
-                column: "ClienteId",
-                unique: true);
+                column: "ClienteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Animal_RacaId",
@@ -201,44 +203,27 @@ namespace projeto_pet_shop_bd1_2021.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Atendimento_AnimalId",
                 table: "Atendimento",
-                column: "AnimalId",
-                unique: true);
+                column: "AnimalId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Atendimento_FuncionarioId",
                 table: "Atendimento",
-                column: "FuncionarioId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Cliente_PessoaId",
-                table: "Cliente",
-                column: "PessoaId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Funcionario_PessoaId",
-                table: "Funcionario",
-                column: "PessoaId",
-                unique: true);
+                column: "FuncionarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Raca_TipoAnimalId",
                 table: "Raca",
-                column: "TipoAnimalId",
-                unique: true);
+                column: "TipoAnimalId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ServicoAtendimento_AtendimentoId",
                 table: "ServicoAtendimento",
-                column: "AtendimentoId",
-                unique: true);
+                column: "AtendimentoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ServicoAtendimento_ServicoId",
                 table: "ServicoAtendimento",
-                column: "ServicoId",
-                unique: true);
+                column: "ServicoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
