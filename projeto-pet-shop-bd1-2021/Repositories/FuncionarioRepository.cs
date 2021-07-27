@@ -18,32 +18,66 @@ namespace projeto_pet_shop_bd1_2021.Repositories
 
         public Funcionario Create(Funcionario item)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.Funcionario.Add(item);
+                _context.SaveChanges();
+                return item;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void Delete(long id)
         {
-            throw new NotImplementedException();
+            var result = _context.Funcionario.SingleOrDefault(p => p.PessoaId.Equals(id));
+
+            if (result != null)
+            {
+                try
+                {
+                    _context.Funcionario.Remove(result);
+                    _context.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
         }
 
         public bool Exists(long id)
-        {
-            throw new NotImplementedException();
-        }
+            => _context.Funcionario.Any(p => p.PessoaId.Equals(id));
 
         public Funcionario FindById(long id)
-        {
-            throw new NotImplementedException();
-        }
+            => _context.Funcionario.SingleOrDefault(p => p.PessoaId.Equals(id));
 
         public List<Funcionario> GetAll()
-        {
-            throw new NotImplementedException();
-        }
+            => _context.Funcionario.ToList();
 
         public Funcionario Update(Funcionario item)
         {
-            throw new NotImplementedException();
+            var result = _context.Funcionario.SingleOrDefault(p => p.PessoaId.Equals(item.PessoaId));
+
+            if (result != null)
+            {
+                try
+                {
+                    _context.Entry(result).CurrentValues.SetValues(item);
+                    _context.SaveChanges();
+                    return result;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

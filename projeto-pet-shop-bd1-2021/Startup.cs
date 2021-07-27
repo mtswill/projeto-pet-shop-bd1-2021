@@ -34,6 +34,8 @@ namespace projeto_pet_shop_bd1_2021
             //DI
             services.AddScoped(typeof(GenericRepository<>));
             services.AddScoped<PessoaRepository>();
+            services.AddScoped<FuncionarioRepository>();
+            services.AddScoped<ClienteRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

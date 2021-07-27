@@ -87,6 +87,5 @@ namespace projeto_pet_shop_bd1_2021.Repositories
         {
             return dataset.Any(p => p.Id.Equals(id));
         }
-
     }
 }

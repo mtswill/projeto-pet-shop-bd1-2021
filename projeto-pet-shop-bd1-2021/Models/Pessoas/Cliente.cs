@@ -2,7 +2,7 @@
 
 namespace projeto_pet_shop_bd1_2021.Models.Pessoas
 {
-    public class Cliente : BaseEntity
+    public class Cliente
     {
         [ForeignKey("PessoaId")]
         public long PessoaId { get; set; }

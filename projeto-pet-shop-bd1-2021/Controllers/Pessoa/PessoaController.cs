@@ -10,9 +10,9 @@ namespace projeto_pet_shop_bd1_2021.Controllers
 {
     public class PessoaController : Controller
     {
-        private GenericRepository<Pessoa> _repository;
+        private PessoaRepository _repository;
 
-        public PessoaController(GenericRepository<Pessoa> repository)
+        public PessoaController(PessoaRepository repository)
         {
             _repository = repository;
         }
