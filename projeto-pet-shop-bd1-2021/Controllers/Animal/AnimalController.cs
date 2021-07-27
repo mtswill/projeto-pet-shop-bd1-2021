@@ -38,14 +38,20 @@ namespace projeto_pet_shop_bd1_2021.Controllers.AnimalController
 
         public ActionResult Create()
         {
-            var racas = _racaRepository.GetAll();
-            var model = new AnimalViewModel(racas);
+            var model = new AnimalViewModel(_racaRepository.GetAll(), _clienteRepository.GetAll());
             return View(model);
         }
 
         public ActionResult Edit(long id)
         {
-            var model = _animalRepository.FindById(id);
+            var animal = _animalRepository.FindById(id);
+            var racas = _racaRepository.GetAll();
+            var clientes = _clienteRepository.GetAll();
+
+            animal.Raca = racas.FirstOrDefault(r => r.Id.Equals(animal.RacaId));
+            animal.Cliente = clientes.FirstOrDefault(r => r.PessoaId.Equals(animal.ClienteId));
+
+            var model = new AnimalViewModel(racas, clientes, animal);
             return View(model);
         }
 
