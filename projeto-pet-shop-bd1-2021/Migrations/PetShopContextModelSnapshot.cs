@@ -84,23 +84,37 @@ namespace projeto_pet_shop_bd1_2021.Migrations
 
             modelBuilder.Entity("projeto_pet_shop_bd1_2021.Models.Pessoas.Cliente", b =>
                 {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
                     b.Property<long>("PessoaId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("PessoaId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("PessoaId");
 
                     b.ToTable("Cliente");
                 });
 
             modelBuilder.Entity("projeto_pet_shop_bd1_2021.Models.Pessoas.Funcionario", b =>
                 {
-                    b.Property<long>("PessoaId")
-                        .HasColumnType("bigint");
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("CarteiraTrabalho")
                         .HasColumnType("text");
 
-                    b.HasKey("PessoaId");
+                    b.Property<long>("PessoaId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PessoaId");
 
                     b.ToTable("Funcionario");
                 });
@@ -195,21 +209,6 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                     b.ToTable("Servico");
                 });
 
-            modelBuilder.Entity("projeto_pet_shop_bd1_2021.Models.ServicosAtendimentos.ServicoAtendimento", b =>
-                {
-                    b.Property<long>("AtendimentoId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("ServicoId")
-                        .HasColumnType("bigint");
-
-                    b.HasIndex("AtendimentoId");
-
-                    b.HasIndex("ServicoId");
-
-                    b.ToTable("ServicoAtendimento");
-                });
-
             modelBuilder.Entity("projeto_pet_shop_bd1_2021.Models.Animais.Animal", b =>
                 {
                     b.HasOne("projeto_pet_shop_bd1_2021.Models.Pessoas.Cliente", "Cliente")
@@ -243,8 +242,8 @@ namespace projeto_pet_shop_bd1_2021.Migrations
             modelBuilder.Entity("projeto_pet_shop_bd1_2021.Models.Pessoas.Cliente", b =>
                 {
                     b.HasOne("projeto_pet_shop_bd1_2021.Models.Pessoas.Pessoa", "Pessoa")
-                        .WithOne()
-                        .HasForeignKey("projeto_pet_shop_bd1_2021.Models.Pessoas.Cliente", "PessoaId")
+                        .WithMany()
+                        .HasForeignKey("PessoaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -254,8 +253,8 @@ namespace projeto_pet_shop_bd1_2021.Migrations
             modelBuilder.Entity("projeto_pet_shop_bd1_2021.Models.Pessoas.Funcionario", b =>
                 {
                     b.HasOne("projeto_pet_shop_bd1_2021.Models.Pessoas.Pessoa", "Pessoa")
-                        .WithOne()
-                        .HasForeignKey("projeto_pet_shop_bd1_2021.Models.Pessoas.Funcionario", "PessoaId")
+                        .WithMany()
+                        .HasForeignKey("PessoaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -285,25 +284,6 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                     b.Navigation("Animal");
 
                     b.Navigation("Funcionario");
-
-                    b.Navigation("Servico");
-                });
-
-            modelBuilder.Entity("projeto_pet_shop_bd1_2021.Models.ServicosAtendimentos.ServicoAtendimento", b =>
-                {
-                    b.HasOne("projeto_pet_shop_bd1_2021.Models.ServicosAtendimentos.Atendimento", "Atendimento")
-                        .WithMany()
-                        .HasForeignKey("AtendimentoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("projeto_pet_shop_bd1_2021.Models.ServicosAtendimentos.Servico", "Servico")
-                        .WithMany()
-                        .HasForeignKey("ServicoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Atendimento");
 
                     b.Navigation("Servico");
                 });

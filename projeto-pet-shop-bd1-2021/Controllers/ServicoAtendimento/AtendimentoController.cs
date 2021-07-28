@@ -58,7 +58,7 @@ namespace projeto_pet_shop_bd1_2021.Controllers.ServicoAtendimento
 
             atendimento.Animal = animais.FirstOrDefault(r => r.Id.Equals(atendimento.AnimalId));
             atendimento.Servico = servicos.FirstOrDefault(r => r.Id.Equals(atendimento.ServicoId));
-            atendimento.Funcionario = funcionarios.FirstOrDefault(r => r.PessoaId.Equals(atendimento.FuncionarioId));
+            atendimento.Funcionario = funcionarios.FirstOrDefault(r => r.Id.Equals(atendimento.FuncionarioId));
 
             return View(new AtendimentoViewModel(atendimento, servicos, animais, funcionarios));
         }

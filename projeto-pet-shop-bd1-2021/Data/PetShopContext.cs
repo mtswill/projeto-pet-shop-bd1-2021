@@ -21,15 +21,15 @@ namespace projeto_pet_shop_bd1_2021.Data
         {
             #region PK
 
-            modelBuilder.Entity<Funcionario>().HasKey(f => f.PessoaId);
-            modelBuilder.Entity<Cliente>().HasKey(c => c.PessoaId);
+            modelBuilder.Entity<Funcionario>().HasKey(f => f.Id);
+            modelBuilder.Entity<Cliente>().HasKey(c => c.Id);
 
             #endregion PK
 
             #region Relacionamentos
 
-            modelBuilder.Entity<Cliente>().HasOne(c => c.Pessoa).WithOne();
-            modelBuilder.Entity<Funcionario>().HasOne(f => f.Pessoa).WithOne();
+            modelBuilder.Entity<Cliente>().HasOne(c => c.Pessoa);
+            modelBuilder.Entity<Funcionario>().HasOne(f => f.Pessoa);
 
             modelBuilder.Entity<Animal>().HasOne(a => a.Raca);
             modelBuilder.Entity<Animal>().HasOne(a => a.Cliente);

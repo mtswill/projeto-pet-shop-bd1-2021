@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Animal.ClienteId" class="control-label"></label>
-                <select asp-for="Animal.ClienteId" class="form-control" asp-items="@(new SelectList(Model.Cliente,"PessoaId", "PessoaId"))"></select>
+                <select asp-for="Animal.ClienteId" class="form-control" asp-items="@(new SelectList(Model.Cliente,"Id", "Id"))"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

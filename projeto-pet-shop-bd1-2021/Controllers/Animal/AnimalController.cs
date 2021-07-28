@@ -49,7 +49,7 @@ namespace projeto_pet_shop_bd1_2021.Controllers.AnimalController
             var clientes = _clienteRepository.GetAll();
 
             animal.Raca = racas.FirstOrDefault(r => r.Id.Equals(animal.RacaId));
-            animal.Cliente = clientes.FirstOrDefault(r => r.PessoaId.Equals(animal.ClienteId));
+            animal.Cliente = clientes.FirstOrDefault(r => r.Id.Equals(animal.ClienteId));
 
             var model = new AnimalViewModel(racas, clientes, animal);
             return View(model);

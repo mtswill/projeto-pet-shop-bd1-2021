@@ -61,11 +61,13 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                 name: "Cliente",
                 columns: table => new
                 {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     PessoaId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cliente", x => x.PessoaId);
+                    table.PrimaryKey("PK_Cliente", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Cliente_Pessoa_PessoaId",
                         column: x => x.PessoaId,
@@ -78,12 +80,14 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                 name: "Funcionario",
                 columns: table => new
                 {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     PessoaId = table.Column<long>(type: "bigint", nullable: false),
                     CarteiraTrabalho = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Funcionario", x => x.PessoaId);
+                    table.PrimaryKey("PK_Funcionario", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Funcionario_Pessoa_PessoaId",
                         column: x => x.PessoaId,
@@ -130,7 +134,7 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                         name: "FK_Animal_Cliente_ClienteId",
                         column: x => x.ClienteId,
                         principalTable: "Cliente",
-                        principalColumn: "PessoaId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Animal_Raca_RacaId",
@@ -148,7 +152,8 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DataHora = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     AnimalId = table.Column<long>(type: "bigint", nullable: false),
-                    FuncionarioId = table.Column<long>(type: "bigint", nullable: false)
+                    FuncionarioId = table.Column<long>(type: "bigint", nullable: false),
+                    ServicoId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -163,27 +168,10 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                         name: "FK_Atendimento_Funcionario_FuncionarioId",
                         column: x => x.FuncionarioId,
                         principalTable: "Funcionario",
-                        principalColumn: "PessoaId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ServicoAtendimento",
-                columns: table => new
-                {
-                    AtendimentoId = table.Column<long>(type: "bigint", nullable: false),
-                    ServicoId = table.Column<long>(type: "bigint", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.ForeignKey(
-                        name: "FK_ServicoAtendimento_Atendimento_AtendimentoId",
-                        column: x => x.AtendimentoId,
-                        principalTable: "Atendimento",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ServicoAtendimento_Servico_ServicoId",
+                        name: "FK_Atendimento_Servico_ServicoId",
                         column: x => x.ServicoId,
                         principalTable: "Servico",
                         principalColumn: "Id",
@@ -211,37 +199,39 @@ namespace projeto_pet_shop_bd1_2021.Migrations
                 column: "FuncionarioId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Atendimento_ServicoId",
+                table: "Atendimento",
+                column: "ServicoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cliente_PessoaId",
+                table: "Cliente",
+                column: "PessoaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Funcionario_PessoaId",
+                table: "Funcionario",
+                column: "PessoaId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Raca_TipoAnimalId",
                 table: "Raca",
                 column: "TipoAnimalId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ServicoAtendimento_AtendimentoId",
-                table: "ServicoAtendimento",
-                column: "AtendimentoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ServicoAtendimento_ServicoId",
-                table: "ServicoAtendimento",
-                column: "ServicoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ServicoAtendimento");
-
-            migrationBuilder.DropTable(
                 name: "Atendimento");
-
-            migrationBuilder.DropTable(
-                name: "Servico");
 
             migrationBuilder.DropTable(
                 name: "Animal");
 
             migrationBuilder.DropTable(
                 name: "Funcionario");
+
+            migrationBuilder.DropTable(
+                name: "Servico");
 
             migrationBuilder.DropTable(
                 name: "Cliente");
