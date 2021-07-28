@@ -48,8 +48,8 @@ namespace projeto_pet_shop_bd1_2021.Data
             modelBuilder.Entity<Atendimento>().HasOne(a => a.Animal);
             modelBuilder.Entity<Atendimento>().HasOne(a => a.Funcionario);
 
-            modelBuilder.Entity<ServicoAtendimento>().HasOne(sa => sa.Atendimento);
-            modelBuilder.Entity<ServicoAtendimento>().HasOne(sa => sa.Servico);
+            //modelBuilder.Entity<ServicoAtendimento>().HasOne(sa => sa.Atendimento);
+            //modelBuilder.Entity<ServicoAtendimento>().HasOne(sa => sa.Servico);
 
             #endregion Relacionamentos
         }

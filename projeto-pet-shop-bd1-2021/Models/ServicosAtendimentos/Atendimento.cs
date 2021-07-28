@@ -14,8 +14,12 @@ namespace projeto_pet_shop_bd1_2021.Models.ServicosAtendimentos
 
         [ForeignKey("FuncionarioId")]
         public long FuncionarioId { get; set; }
+        
+        [ForeignKey("ServicoId")]
+        public long ServicoId { get; set; }
 
         public Animal Animal { get; set; }
         public Funcionario Funcionario { get; set; }
+        public Servico Servico { get; set; }
     }
 }
